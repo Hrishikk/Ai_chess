@@ -1,0 +1,172 @@
+/**
+ * Overlay and chrome styles:
+ * Header, status bar, controls, game-over overlay, and animations.
+ */
+
+/* ─── Header ───────────────────────────────────────────────────────────────── */
+
+.chess-header {
+  text-align: center;
+}
+
+.chess-title {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+}
+
+.title-icon {
+  font-size: 2.2rem;
+  filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.5));
+}
+
+.chess-subtitle {
+  margin: 4px 0 0;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ─── Status Bar ───────────────────────────────────────────────────────────── */
+
+.status-bar {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 12px 24px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  min-width: 280px;
+  text-align: center;
+}
+
+.status-bar.status-check {
+  background: rgba(255, 180, 0, 0.12);
+  border-color: rgba(255, 180, 0, 0.3);
+  color: #ffcc00;
+}
+
+.status-bar.status-win {
+  background: rgba(0, 220, 100, 0.12);
+  border-color: rgba(0, 220, 100, 0.3);
+  color: #44ff88;
+}
+
+.status-bar.status-lose {
+  background: rgba(255, 60, 60, 0.12);
+  border-color: rgba(255, 60, 60, 0.3);
+  color: #ff6666;
+}
+
+.status-bar.status-draw {
+  background: rgba(100, 140, 255, 0.12);
+  border-color: rgba(100, 140, 255, 0.3);
+  color: #88aaff;
+}
+
+.status-bar.status-thinking {
+  color: var(--text-secondary);
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.5; }
+}
+
+/* ─── Controls ─────────────────────────────────────────────────────────────── */
+
+.controls {
+  margin-top: 4px;
+}
+
+.new-game-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--text-primary);
+  padding: 12px 32px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: var(--font-sans);
+  letter-spacing: 0.02em;
+}
+
+.new-game-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 215, 0, 0.3);
+  color: var(--accent-gold);
+  transform: translateY(-1px);
+}
+
+.new-game-btn:active {
+  transform: translateY(0);
+}
+
+/* ─── Game Over Overlay ────────────────────────────────────────────────────── */
+
+.game-over-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.game-over-card {
+  background: #16162a;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 40px 48px;
+  text-align: center;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
+  animation: slideUp 0.4s ease;
+  max-width: 360px;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(24px) scale(0.95); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.game-over-icon    { font-size: 4rem; margin-bottom: 12px; }
+.game-over-title   { font-size: 1.75rem; font-weight: 700; margin: 0 0 8px; }
+.game-over-subtitle { font-size: 0.95rem; color: var(--text-secondary); margin: 0 0 28px; }
+.game-over-btn     { width: 100%; padding: 14px 0; font-size: 1rem; }
+
+/* ─── Responsive (overlay / chrome) ────────────────────────────────────────── */
+
+@media (max-width: 500px) {
+  .chess-title  { font-size: 1.5rem; }
+  .title-icon   { font-size: 1.7rem; }
+
+  .status-bar {
+    min-width: auto;
+    padding: 10px 16px;
+    font-size: 0.85rem;
+  }
+
+  .game-over-card {
+    padding: 32px 28px;
+    margin: 0 16px;
+  }
+}
